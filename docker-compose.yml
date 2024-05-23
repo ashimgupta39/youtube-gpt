@@ -1,0 +1,15 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./youtube-clone
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+
+  backend:
+    build:
+      context: ./youtubeGpt/TransCribe/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
