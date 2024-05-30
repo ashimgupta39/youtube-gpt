@@ -88,7 +88,7 @@ const WatchPage = () => {
             }
             console.log(request_body)
             // make the request-
-            const promptResponse = await fetch("http://0.0.0.0:8000/chat",{
+            const promptResponse = await fetch("http://100.25.147.28:8000/chat",{
                 method:'POST',
                 headers:{
                     'Accept' : '*/*',
