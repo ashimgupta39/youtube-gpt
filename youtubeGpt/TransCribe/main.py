@@ -44,9 +44,9 @@ origins = [
     "http://localhost:3002",  # Frontend origin (React app running on localhost:3000)
     "http://127.0.0.1:3002",  # Another way of accessing localhost
     "http://0.0.0.0:3002",  # Another way of accessing localhost
-    "http://100.25.147.28:3002/",
-    "http://100.25.147.28:3000/",
-    "http://100.25.147.28/"
+    "http://100.25.147.28:3002",
+    "http://100.25.147.28:3000",
+    "http://100.25.147.28"
     # Add any other origins you want to allow
 ]
 app.add_middleware(
