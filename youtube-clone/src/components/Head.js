@@ -4,7 +4,7 @@ import { toggleMemu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import store from "../utils/store";
 import { cacheResults } from "../utils/searchSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function Head(){
@@ -12,6 +12,7 @@ export default function Head(){
     const [searchQuery, setSearchQuery] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const [showSuggestions, setShowSuggestions] = useState(false)
+    const navigate = useNavigate();
     
     const searchCache = useSelector(store=> store.search)
 
@@ -45,6 +46,16 @@ export default function Head(){
     const toggleMemuHandler = ()=>{
         dispatch(toggleMemu())
     }
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            const query = searchQuery.split(" ").join("+");
+            navigate("/search?q=" + query);
+        }
+    };
+    const handleSearchClick = () => {
+        const query = searchQuery.split(" ").join("+");
+        navigate("/search?q=" + query);
+    };
     return(
         <div className = "fixed top-0 left-0 right-0 grid grid-flow-col p-3 mt-0 shadow-lg mb-12 bg-white">
             <div className="flex col-span-1">
@@ -58,8 +69,9 @@ export default function Head(){
                 onChange={(e)=>{setSearchQuery(e.target.value)}}
                 onFocus={()=> setShowSuggestions(true)}
                 onBlur={() => {setTimeout(()=>setShowSuggestions(false),500)}}
+                onKeyDown={handleKeyDown}
                 />
-                <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100" style={{ boxSizing: 'border-box' }}>
+                <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100" style={{ boxSizing: 'border-box' }} onClick={handleSearchClick}>
                     <img className="h-[18px]" alt="search" src="https://clipground.com/images/search-vector-clipart-1.jpg"/>
                 </button>
                 { showSuggestions &&(
